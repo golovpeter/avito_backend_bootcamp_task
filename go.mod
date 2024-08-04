@@ -3,7 +3,9 @@ module avito_backend_bootcamp_task
 go 1.22
 
 require (
+	github.com/gin-contrib/requestid v1.0.2
 	github.com/gin-gonic/gin v1.10.0
+	github.com/golang-jwt/jwt/v4 v4.5.0
 	github.com/jackc/pgx/v5 v5.6.0
 	github.com/jmoiron/sqlx v1.4.0
 	github.com/oapi-codegen/runtime v1.1.1

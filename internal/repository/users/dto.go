@@ -1,17 +1,20 @@
 package users
 
 type UserData struct {
-	Email        string
-	PasswordHash string
-	Role         string
+	UserID       int64  `db:"id"`
+	Email        string `db:"email"`
+	PasswordHash string `db:"password_hash"`
+	Role         string `db:"role"`
 }
 
 type CreateUserOut struct {
-	UserID int64
+	UserID int64 `db:"id"`
 }
 
 type GetUserDataOut struct {
-	PasswordHash string
+	UserID       int64  `db:"id"`
+	Email        string `db:"email"`
+	PasswordHash string `db:"password_hash"`
 }
 
 type GetUserRoleOut struct {

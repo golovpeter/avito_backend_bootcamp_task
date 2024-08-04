@@ -31,9 +31,31 @@ func (s *service) Register(ctx context.Context, data *UserDataIn) (*RegisterOut,
 	return &RegisterOut{UserID: repoData.UserID}, nil
 }
 
-func (s *service) Login(ctx context.Context, data *UserDataIn) error {
-	//TODO implement me
-	panic("implement me")
+func (s *service) Login(ctx context.Context, data *UserDataIn) (string, error) {
+	userInfo, err := s.repository.GetUserData(ctx, &users.UserData{
+		Email: data.Email,
+	})
+	if err != nil {
+		return "", err
+	}
+
+	if userInfo.Email == "" {
+		return "", common.ErrUserNotExist
+	}
+
+	correctCredentials := common.CompareHashAndPassword(data.Password, userInfo.PasswordHash)
+	if !correctCredentials {
+		return "", common.ErrIncorrectCredentials
+	}
+
+	newToken, err := common.GenerateJWT(
+		s.jwtKey,
+		userInfo.UserID,
+		userInfo.Email,
+	)
+
+	return newToken, nil
+
 }
 
 func (s *service) Authorization(ctx context.Context, data *UserDataIn) (*AuthorizationOut, error) {

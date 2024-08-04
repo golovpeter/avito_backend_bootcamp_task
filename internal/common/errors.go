@@ -3,8 +3,9 @@ package common
 import "errors"
 
 var (
-	ErrUserAlreadyExist = errors.New("user already exist")
-	ErrUserNotExist     = errors.New("user does not exist")
+	ErrUserAlreadyExist     = errors.New("user already exist")
+	ErrUserNotExist         = errors.New("user does not exist")
+	ErrIncorrectCredentials = errors.New("invalid credentials")
 )
 
 type Err5xx struct {

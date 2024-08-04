@@ -45,9 +45,21 @@ func (r *repository) CreateUser(ctx context.Context, data *UserData) (*CreateUse
 
 }
 
+const getUserQuery = `
+	SELECT id, email, password_hash
+	FROM users
+	WHERE email = $1
+`
+
 func (r *repository) GetUserData(ctx context.Context, data *UserData) (*GetUserDataOut, error) {
-	//TODO implement me
-	panic("implement me")
+	var userData GetUserDataOut
+
+	err := r.conn.GetContext(ctx, &userData, getUserQuery, data.Email)
+	if err != nil {
+		return nil, err
+	}
+
+	return &userData, nil
 }
 
 func (r *repository) GetUserRole(ctx context.Context, data *UserData) (*GetUserRoleOut, error) {

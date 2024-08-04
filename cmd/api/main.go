@@ -3,6 +3,7 @@ package main
 import (
 	"avito_backend_bootcamp_task/internal/common"
 	"avito_backend_bootcamp_task/internal/config"
+	"avito_backend_bootcamp_task/internal/handler/login"
 	"avito_backend_bootcamp_task/internal/handler/register"
 	"avito_backend_bootcamp_task/internal/repository/users"
 	usersservice "avito_backend_bootcamp_task/internal/service/users"
@@ -41,15 +42,16 @@ func main() {
 	usersService := usersservice.NewService(usersRepository, cfg.Server.JwtKey)
 
 	registerHandler := register.NewHandler(logger, usersService)
+	loginHandler := login.NewHandler(logger, usersService)
 
 	router := gin.Default()
 
 	router.Use(requestid.New())
 
 	router.POST("/register", registerHandler.Register)
+	router.POST("/login", loginHandler.Login)
 
 	if err = router.Run(fmt.Sprintf(":%d", cfg.Server.Port)); err != nil {
 		logger.WithError(err).Error("server error occurred")
 	}
-
 }

@@ -6,6 +6,7 @@ var (
 	ErrUserAlreadyExist     = errors.New("user already exist")
 	ErrUserNotExist         = errors.New("user does not exist")
 	ErrIncorrectCredentials = errors.New("invalid credentials")
+	ErrCompileRegexp        = errors.New("failed to compile regexp")
 )
 
 type Err5xx struct {

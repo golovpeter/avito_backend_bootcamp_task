@@ -28,6 +28,19 @@ func (h *handler) Register(ctx *gin.Context) {
 		return
 	}
 
+	isValid, errMsg, err := common.ValidateUserData(in.Email, in.Password)
+	if err != nil {
+		h.log.WithError(err).Error(errMsg)
+		ctx.JSON(http.StatusBadRequest, nil)
+		return
+	}
+
+	if !isValid {
+		h.log.Warn(errMsg)
+		ctx.JSON(http.StatusBadRequest, nil)
+		return
+	}
+
 	userData, err := h.service.Register(ctx, &users.UserDataIn{
 		Email:    in.Email,
 		Password: in.Password,

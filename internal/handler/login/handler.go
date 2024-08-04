@@ -29,6 +29,19 @@ func (h *handler) Login(ctx *gin.Context) {
 		return
 	}
 
+	isValid, errMsg, err := common.ValidateUserData(in.Email, in.Password)
+	if err != nil {
+		h.log.WithError(err).Error(errMsg)
+		ctx.JSON(http.StatusBadRequest, nil)
+		return
+	}
+
+	if !isValid {
+		h.log.Warn(errMsg)
+		ctx.JSON(http.StatusBadRequest, nil)
+		return
+	}
+
 	token, err := h.service.Login(ctx, &users.UserDataIn{
 		Email:    in.Email,
 		Password: in.Password,

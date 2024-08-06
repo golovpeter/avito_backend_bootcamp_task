@@ -25,20 +25,20 @@ func (h *handler) Login(ctx *gin.Context) {
 
 	if err := ctx.BindJSON(&in); err != nil {
 		h.log.WithError(err).Error("error binding JSON")
-		ctx.JSON(http.StatusBadRequest, nil)
+		ctx.Writer.WriteHeader(http.StatusBadRequest)
 		return
 	}
 
 	isValid, errMsg, err := common.ValidateUserData(in.Email, in.Password)
 	if err != nil {
 		h.log.WithError(err).Error(errMsg)
-		ctx.JSON(http.StatusBadRequest, nil)
+		ctx.Writer.WriteHeader(http.StatusBadRequest)
 		return
 	}
 
 	if !isValid {
 		h.log.Warn(errMsg)
-		ctx.JSON(http.StatusBadRequest, nil)
+		ctx.Writer.WriteHeader(http.StatusBadRequest)
 		return
 	}
 
@@ -48,7 +48,7 @@ func (h *handler) Login(ctx *gin.Context) {
 	})
 	if err != nil && errors.Is(common.ErrUserNotExist, err) {
 		h.log.WithError(err).Error("user does not exist")
-		ctx.JSON(http.StatusNotFound, nil)
+		ctx.Writer.WriteHeader(http.StatusNotFound)
 		return
 	}
 

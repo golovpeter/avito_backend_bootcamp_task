@@ -46,7 +46,7 @@ func (r *repository) CreateUser(ctx context.Context, data *UserData) (*CreateUse
 }
 
 const getUserQuery = `
-	SELECT id, email, password_hash
+	SELECT id, email, password_hash, role
 	FROM users
 	WHERE email = $1
 `

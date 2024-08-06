@@ -52,6 +52,7 @@ func (s *service) Login(ctx context.Context, data *UserDataIn) (string, error) {
 		s.jwtKey,
 		userInfo.UserID,
 		userInfo.Email,
+		userInfo.UserType,
 	)
 
 	return newToken, nil

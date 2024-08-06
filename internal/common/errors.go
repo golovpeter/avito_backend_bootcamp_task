@@ -7,6 +7,8 @@ var (
 	ErrUserNotExist         = errors.New("user does not exist")
 	ErrIncorrectCredentials = errors.New("invalid credentials")
 	ErrCompileRegexp        = errors.New("failed to compile regexp")
+	ErrInvalidAuthHeader    = errors.New("invalid authorization header")
+	ErrAccessDenied         = errors.New("access denied")
 )
 
 type Err5xx struct {

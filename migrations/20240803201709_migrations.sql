@@ -1,6 +1,7 @@
 -- +goose Up
 -- +goose StatementBegin
 CREATE TYPE user_role AS ENUM ('client', 'moderator');
+CREATE TYPE flat_status AS ENUM ('created', 'on_moderate', 'approved', 'declined');
 
 CREATE TABLE IF NOT EXISTS users
 (
@@ -23,16 +24,20 @@ CREATE TABLE IF NOT EXISTS houses
 CREATE TABLE IF NOT EXISTS flats
 (
     id       BIGSERIAL PRIMARY KEY,
-    number   INTEGER NOT NULL,
-    price    INTEGER NOT NULL,
-    house_id INT     NOT NULL REFERENCES houses (id) ON DELETE CASCADE
+    number   INTEGER     NOT NULL,
+    price    INTEGER     NOT NULL,
+    house_id INT         NOT NULL REFERENCES houses (id) ON DELETE CASCADE,
+    status   flat_status NOT NULL DEFAULT 'created',
+
+    UNIQUE (number, house_id)
 );
 -- +goose StatementEnd
 
 -- +goose Down
 -- +goose StatementBegin
-DROP TYPE IF EXISTS user_role;
 DROP TABLE IF EXISTS users;
-DROP TABLE IF EXISTS houses;
 DROP TABLE IF EXISTS flats;
+DROP TABLE IF EXISTS houses;
+DROP TYPE IF EXISTS user_role;
+DROP TYPE IF EXISTS flat_status;
 -- +goose StatementEnd

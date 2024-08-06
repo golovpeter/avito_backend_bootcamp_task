@@ -17,8 +17,8 @@ import (
 )
 
 const (
-	casbinModelPath  = "casbin_configs/model.conf"
-	casbinPolicyPath = "casbin_configs/policy.csv"
+	casbinModelPath  = "internal/config/casbin_config/model.conf"
+	casbinPolicyPath = "internal/config/casbin_config/policy.csv"
 )
 
 func main() {

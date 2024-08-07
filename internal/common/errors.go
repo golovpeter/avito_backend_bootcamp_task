@@ -10,6 +10,7 @@ var (
 	ErrInvalidAuthHeader    = errors.New("invalid authorization header")
 	ErrAccessDenied         = errors.New("access denied")
 	ErrHouseAlreadyExist    = errors.New("house already exist")
+	ErrFlatAlreadyExist     = errors.New("flat already exist")
 )
 
 type Err5xx struct {

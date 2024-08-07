@@ -13,7 +13,7 @@ func NewService(repository flats.Repository) *service {
 	return &service{repository: repository}
 }
 
-func (s *service) CreateFlat(ctx context.Context, data *CreateFlatIn) (*CreateFlatOut, error) {
+func (s *service) CreateFlat(ctx context.Context, data *CreateFlatIn) (*FlatData, error) {
 	flatData, err := s.repository.InsertNewFlat(ctx, &flats.InsertNewFlatIn{
 		HouseID: data.HouseID,
 		Price:   data.Price,
@@ -24,7 +24,7 @@ func (s *service) CreateFlat(ctx context.Context, data *CreateFlatIn) (*CreateFl
 		return nil, err
 	}
 
-	return &CreateFlatOut{
+	return &FlatData{
 		ID:      flatData.ID,
 		HouseID: flatData.HouseID,
 		Price:   flatData.Price,
@@ -32,4 +32,24 @@ func (s *service) CreateFlat(ctx context.Context, data *CreateFlatIn) (*CreateFl
 		Number:  flatData.Number,
 		Status:  flatData.Status,
 	}, nil
+}
+
+func (s *service) UpdateFlatStatus(ctx context.Context, data *UpdateFlatIn) (*FlatData, error) {
+	flatData, err := s.repository.UpdateFlatStatus(ctx, &flats.UpdateFlatIn{
+		ID:     data.ID,
+		Status: data.Status,
+	})
+	if err != nil {
+		return nil, err
+	}
+
+	return &FlatData{
+		ID:      flatData.ID,
+		HouseID: flatData.HouseID,
+		Price:   flatData.Price,
+		Rooms:   flatData.Rooms,
+		Number:  flatData.Number,
+		Status:  flatData.Status,
+	}, nil
+
 }

@@ -7,6 +7,7 @@ import (
 	"avito_backend_bootcamp_task/internal/handler/house_create"
 	"avito_backend_bootcamp_task/internal/handler/login"
 	"avito_backend_bootcamp_task/internal/handler/register"
+	"avito_backend_bootcamp_task/internal/handler/update_flat_status"
 	"avito_backend_bootcamp_task/internal/middleware/authorization"
 	"avito_backend_bootcamp_task/internal/repository/flats"
 	"avito_backend_bootcamp_task/internal/repository/houses"
@@ -68,6 +69,7 @@ func main() {
 	loginHandler := login.NewHandler(logger, usersService)
 	createHouseHandler := house_create.NewHandler(logger, housesService)
 	createFlatHandler := flat_create.NewHandler(logger, flatsService)
+	updateFlatStatusHandler := update_flat_status.NewHandler(logger, flatsService)
 
 	router := gin.Default()
 	router.Use(requestid.New())
@@ -88,6 +90,7 @@ func main() {
 		authorization.Authorization(logger, enforcer, cfg.Server.JwtKey))
 	{
 		flatGroup.POST("/create", createFlatHandler.CreateFlat)
+		flatGroup.POST("/update", updateFlatStatusHandler.UpdateFlatStatus)
 	}
 
 	if err = router.Run(fmt.Sprintf(":%d", cfg.Server.Port)); err != nil {

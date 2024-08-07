@@ -12,6 +12,6 @@ type CreateFlatOut struct {
 	HouseID int64  `json:"house_id"`
 	Price   int64  `json:"price"`
 	Rooms   int    `json:"rooms"`
-	Status  string `json:"status"`
 	Number  int    `json:"number"`
+	Status  string `json:"status"`
 }

@@ -14,7 +14,7 @@ CREATE TABLE IF NOT EXISTS users
 CREATE TABLE IF NOT EXISTS houses
 (
     id         BIGSERIAL PRIMARY KEY,
-    address    VARCHAR(30) UNIQUE NOT NULL,
+    address    VARCHAR(100) UNIQUE NOT NULL,
     year       INT                NOT NULL,
     developer  VARCHAR(20)        NOT NULL,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
@@ -25,6 +25,7 @@ CREATE TABLE IF NOT EXISTS flats
 (
     id       BIGSERIAL PRIMARY KEY,
     number   INTEGER     NOT NULL,
+    rooms    INTEGER     NOT NULL,
     price    INTEGER     NOT NULL,
     house_id INT         NOT NULL REFERENCES houses (id) ON DELETE CASCADE,
     status   flat_status NOT NULL DEFAULT 'created',

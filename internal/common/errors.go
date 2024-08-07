@@ -11,6 +11,7 @@ var (
 	ErrAccessDenied         = errors.New("access denied")
 	ErrHouseAlreadyExist    = errors.New("house already exist")
 	ErrFlatAlreadyExist     = errors.New("flat already exist")
+	ErrUpdateFlatStatus     = errors.New("failed to update flat status")
 )
 
 type Err5xx struct {

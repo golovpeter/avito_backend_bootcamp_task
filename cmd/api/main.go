@@ -3,10 +3,13 @@ package main
 import (
 	"avito_backend_bootcamp_task/internal/common"
 	"avito_backend_bootcamp_task/internal/config"
+	"avito_backend_bootcamp_task/internal/handler/house_create"
 	"avito_backend_bootcamp_task/internal/handler/login"
 	"avito_backend_bootcamp_task/internal/handler/register"
 	"avito_backend_bootcamp_task/internal/middleware/authorization"
+	"avito_backend_bootcamp_task/internal/repository/houses"
 	"avito_backend_bootcamp_task/internal/repository/users"
+	housesservice "avito_backend_bootcamp_task/internal/service/houses"
 	usersservice "avito_backend_bootcamp_task/internal/service/users"
 	"fmt"
 
@@ -51,11 +54,14 @@ func main() {
 	}
 
 	usersRepository := users.NewRepository(dbConn)
+	housesRepository := houses.NewRepository(dbConn)
 
 	usersService := usersservice.NewService(usersRepository, cfg.Server.JwtKey)
+	housesService := housesservice.NewService(housesRepository)
 
 	registerHandler := register.NewHandler(logger, usersService)
 	loginHandler := login.NewHandler(logger, usersService)
+	createHouseHandler := house_create.NewHandler(logger, housesService)
 
 	router := gin.Default()
 	router.Use(requestid.New())
@@ -69,7 +75,7 @@ func main() {
 	houseGroup := router.Group("/house").Use(
 		authorization.Authorization(logger, enforcer, cfg.Server.JwtKey))
 	{
-		houseGroup.POST("/create", func(context *gin.Context) {})
+		houseGroup.POST("/create", createHouseHandler.CreateHouse)
 	}
 
 	flatGroup := router.Group("/flat").Use(

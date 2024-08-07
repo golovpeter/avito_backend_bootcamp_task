@@ -18,7 +18,7 @@ CREATE TABLE IF NOT EXISTS houses
     year       INT                NOT NULL,
     developer  VARCHAR(20)        NOT NULL,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
-    updated_at TIMESTAMP WITH TIME ZONE
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
 
 CREATE TABLE IF NOT EXISTS flats

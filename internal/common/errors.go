@@ -9,6 +9,7 @@ var (
 	ErrCompileRegexp        = errors.New("failed to compile regexp")
 	ErrInvalidAuthHeader    = errors.New("invalid authorization header")
 	ErrAccessDenied         = errors.New("access denied")
+	ErrHouseAlreadyExist    = errors.New("house already exist")
 )
 
 type Err5xx struct {

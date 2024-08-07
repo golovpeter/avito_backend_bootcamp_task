@@ -31,13 +31,13 @@ func (h *handler) Login(ctx *gin.Context) {
 
 	isValid, errMsg, err := common.ValidateUserData(in.Email, in.Password)
 	if err != nil {
-		h.log.WithError(err).Error(errMsg)
+		h.log.WithError(err).Error(err.Error())
 		ctx.Writer.WriteHeader(http.StatusBadRequest)
 		return
 	}
 
 	if !isValid {
-		h.log.Warn(errMsg)
+		h.log.Error(errMsg)
 		ctx.Writer.WriteHeader(http.StatusBadRequest)
 		return
 	}

@@ -33,16 +33,15 @@ func (r *repository) CreateUser(ctx context.Context, data *UserData) (*CreateUse
 	}
 
 	err := row.Scan(&newUserId)
-	if err != nil && !errors.Is(err, sql.ErrNoRows) {
-		return nil, err
-	}
-
-	if err != nil {
+	if err != nil && errors.Is(err, sql.ErrNoRows) {
 		return nil, common.ErrUserAlreadyExist
 	}
 
-	return &CreateUserOut{UserID: newUserId}, nil
+	if err != nil {
+		return nil, err
+	}
 
+	return &CreateUserOut{UserID: newUserId}, nil
 }
 
 const getUserQuery = `
@@ -60,9 +59,4 @@ func (r *repository) GetUserData(ctx context.Context, data *UserData) (*GetUserD
 	}
 
 	return &userData, nil
-}
-
-func (r *repository) GetUserRole(ctx context.Context, data *UserData) (*GetUserRoleOut, error) {
-	//TODO implement me
-	panic("implement me")
 }

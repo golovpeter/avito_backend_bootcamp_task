@@ -1,4 +1,5 @@
-p, moderator, */*, *
+p, moderator, /house/*, POST
+p, moderator, /flat/*, POST
+p, moderator, /house/:id, GET
 p, client, /house/:id, GET
-p, client, /house/:id/subscribe, POST
 p, client, /flat/create, POST

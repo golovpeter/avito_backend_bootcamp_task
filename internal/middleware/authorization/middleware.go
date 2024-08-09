@@ -61,6 +61,7 @@ func Authorization(
 			return
 		}
 
+		ctx.Set("user_type", claims["UserType"].(string))
 		ctx.Next()
 	}
 }

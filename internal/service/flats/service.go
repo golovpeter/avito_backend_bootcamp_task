@@ -51,5 +51,44 @@ func (s *service) UpdateFlatStatus(ctx context.Context, data *UpdateFlatIn) (*Fl
 		Number:  flatData.Number,
 		Status:  flatData.Status,
 	}, nil
+}
 
+func (s *service) GetFlatsByHouseID(ctx context.Context, data *GetFlatsByHouseID) ([]*FlatData, error) {
+	var out []*FlatData
+
+	flats, err := s.repository.GetFlatsByHouseID(ctx, &flats.GetFlatsIn{
+		HouseID: data.HouseID,
+	})
+	if err != nil {
+		return nil, err
+	}
+
+	switch data.UserType {
+	case "moderator":
+		for _, flat := range flats {
+			out = append(out, &FlatData{
+				ID:      flat.ID,
+				HouseID: flat.HouseID,
+				Price:   flat.Price,
+				Rooms:   flat.Rooms,
+				Number:  flat.Number,
+				Status:  flat.Status,
+			})
+		}
+	case "client":
+		for _, flat := range flats {
+			if flat.Status == "approved" {
+				out = append(out, &FlatData{
+					ID:      flat.ID,
+					HouseID: flat.HouseID,
+					Price:   flat.Price,
+					Rooms:   flat.Rooms,
+					Number:  flat.Number,
+					Status:  flat.Status,
+				})
+			}
+		}
+	}
+
+	return out, nil
 }

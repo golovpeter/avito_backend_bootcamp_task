@@ -20,3 +20,8 @@ type UpdateFlatIn struct {
 	ID     int64
 	Status string
 }
+
+type GetFlatsByHouseID struct {
+	HouseID  int64
+	UserType string
+}

@@ -20,3 +20,11 @@ type UpdateFlatIn struct {
 	ID     int64  `db:"id"`
 	Status string `db:"status"`
 }
+
+type GetFlatsIn struct {
+	HouseID int64 ``
+}
+
+type GetFlatsOut struct {
+	Flats []FlatData
+}

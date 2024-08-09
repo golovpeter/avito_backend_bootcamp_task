@@ -12,6 +12,7 @@ var (
 	ErrHouseAlreadyExist    = errors.New("house already exist")
 	ErrFlatAlreadyExist     = errors.New("flat already exist")
 	ErrUpdateFlatStatus     = errors.New("failed to update flat status")
+	ErrUserTypeNotExist     = errors.New("user type does not exist")
 )
 
 type Err5xx struct {

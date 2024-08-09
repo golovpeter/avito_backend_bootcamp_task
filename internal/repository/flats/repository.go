@@ -78,3 +78,36 @@ func (r *repository) UpdateFlatStatus(ctx context.Context, data *UpdateFlatIn) (
 
 	return &out, nil
 }
+
+const getFlatsClientQuery = `
+	SELECT *
+	FROM flats
+	WHERE house_id = $1
+`
+
+func (r *repository) GetFlatsByHouseID(ctx context.Context, data *GetFlatsIn) ([]*FlatData, error) {
+	out := make([]*FlatData, 0)
+
+	rows, err := r.conn.QueryxContext(ctx, getFlatsClientQuery, data.HouseID)
+	if err != nil {
+		return nil, err
+	}
+
+	for rows.Next() {
+		var flat FlatData
+		if err = rows.Scan(
+			&flat.ID,
+			&flat.Number,
+			&flat.Rooms,
+			&flat.Price,
+			&flat.HouseID,
+			&flat.Status,
+		); err != nil {
+			return nil, err
+		}
+
+		out = append(out, &flat)
+	}
+
+	return out, nil
+}

@@ -4,6 +4,7 @@ import (
 	"avito_backend_bootcamp_task/internal/common"
 	"avito_backend_bootcamp_task/internal/config"
 	"avito_backend_bootcamp_task/internal/handler/flat_create"
+	"avito_backend_bootcamp_task/internal/handler/get_flats"
 	"avito_backend_bootcamp_task/internal/handler/house_create"
 	"avito_backend_bootcamp_task/internal/handler/login"
 	"avito_backend_bootcamp_task/internal/handler/register"
@@ -70,6 +71,7 @@ func main() {
 	createHouseHandler := house_create.NewHandler(logger, housesService)
 	createFlatHandler := flat_create.NewHandler(logger, flatsService)
 	updateFlatStatusHandler := update_flat_status.NewHandler(logger, flatsService)
+	getFlatsHandler := get_flats.NewHandler(logger, flatsService)
 
 	router := gin.Default()
 	router.Use(requestid.New())
@@ -84,6 +86,7 @@ func main() {
 		authorization.Authorization(logger, enforcer, cfg.Server.JwtKey))
 	{
 		houseGroup.POST("/create", createHouseHandler.CreateHouse)
+		houseGroup.GET("/:id", getFlatsHandler.GetFlats)
 	}
 
 	flatGroup := router.Group("/flat").Use(

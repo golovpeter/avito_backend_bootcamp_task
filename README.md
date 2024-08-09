@@ -78,7 +78,7 @@ docker compose up
 
    **Пример запроса:**
    ```bash
-    curl -X POST http://localhost:8080/house/create \
+    curl -X POST http://localhost:8080/flat/update \
       -H "Content-Type: application/json" \
       -H "Authorization": "Bearer TOKEN" \
       -d '{

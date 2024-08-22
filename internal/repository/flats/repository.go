@@ -1,11 +1,11 @@
 package flats
 
 import (
-	"avito_backend_bootcamp_task/internal/common"
 	"context"
 	"database/sql"
 	"errors"
 
+	"github.com/golovpeter/avito_backend_bootcamp_task/internal/common"
 	"github.com/jmoiron/sqlx"
 )
 

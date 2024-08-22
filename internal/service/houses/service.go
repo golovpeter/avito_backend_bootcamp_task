@@ -1,8 +1,9 @@
 package houses
 
 import (
-	"avito_backend_bootcamp_task/internal/repository/houses"
 	"context"
+
+	"github.com/golovpeter/avito_backend_bootcamp_task/internal/repository/houses"
 )
 
 type service struct {

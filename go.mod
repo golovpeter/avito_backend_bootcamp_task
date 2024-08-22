@@ -1,4 +1,4 @@
-module avito_backend_bootcamp_task
+module github.com/golovpeter/avito_backend_bootcamp_task
 
 go 1.22
 

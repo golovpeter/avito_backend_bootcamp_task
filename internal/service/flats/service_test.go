@@ -1,12 +1,12 @@
 package flats
 
 import (
-	"avito_backend_bootcamp_task/internal/repository/flats"
 	"context"
 	"errors"
 	"testing"
 
 	"github.com/golang/mock/gomock"
+	"github.com/golovpeter/avito_backend_bootcamp_task/internal/repository/flats"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/suite"
 )

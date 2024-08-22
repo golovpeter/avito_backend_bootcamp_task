@@ -1,9 +1,9 @@
 package common
 
 import (
-	"avito_backend_bootcamp_task/internal/config"
 	"fmt"
 
+	"github.com/golovpeter/avito_backend_bootcamp_task/internal/config"
 	_ "github.com/jackc/pgx/v5/stdlib"
 	"github.com/jmoiron/sqlx"
 	"github.com/pressly/goose/v3"

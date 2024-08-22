@@ -1,12 +1,12 @@
 package flat_create
 
 import (
-	"avito_backend_bootcamp_task/internal/common"
-	"avito_backend_bootcamp_task/internal/service/flats"
 	"net/http"
 
 	"github.com/gin-contrib/requestid"
 	"github.com/gin-gonic/gin"
+	"github.com/golovpeter/avito_backend_bootcamp_task/internal/common"
+	"github.com/golovpeter/avito_backend_bootcamp_task/internal/service/flats"
 	"github.com/sirupsen/logrus"
 )
 

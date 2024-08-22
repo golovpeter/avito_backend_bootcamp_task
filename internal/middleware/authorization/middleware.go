@@ -1,13 +1,13 @@
 package authorization
 
 import (
-	"avito_backend_bootcamp_task/internal/common"
 	"net/http"
 	"strings"
 
 	"github.com/casbin/casbin/v2"
 	"github.com/gin-contrib/requestid"
 	"github.com/gin-gonic/gin"
+	"github.com/golovpeter/avito_backend_bootcamp_task/internal/common"
 	"github.com/sirupsen/logrus"
 )
 

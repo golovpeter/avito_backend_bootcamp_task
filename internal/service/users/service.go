@@ -1,9 +1,10 @@
 package users
 
 import (
-	"avito_backend_bootcamp_task/internal/common"
-	"avito_backend_bootcamp_task/internal/repository/users"
 	"context"
+
+	"github.com/golovpeter/avito_backend_bootcamp_task/internal/common"
+	"github.com/golovpeter/avito_backend_bootcamp_task/internal/repository/users"
 )
 
 type service struct {

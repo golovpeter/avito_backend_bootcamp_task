@@ -1,8 +1,9 @@
 package flats
 
 import (
-	"avito_backend_bootcamp_task/internal/repository/flats"
 	"context"
+
+	"github.com/golovpeter/avito_backend_bootcamp_task/internal/repository/flats"
 )
 
 type service struct {
